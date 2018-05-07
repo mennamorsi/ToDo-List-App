@@ -237,19 +237,27 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
                                 .setPositiveButton("Commit", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Log.d("on item click","on click item "+(int)(info.id+1));
+                                        View parent = (View) info.targetView;
+                                        TextView taskTextView = (TextView) parent.findViewById(R.id.task_title);
+                                        String task = String.valueOf(taskTextView.getText());
                                         final EditText txt= (EditText) dialogView.findViewById(R.id.Etask);
-                                        String task = txt.getText().toString();
-                                        Log.d("on item click","the edit value is = "+task);
+                                        String utask = txt.getText().toString();
+                                        Log.d("on item click","the update value "+utask+ " the old value "+task);
                                         SQLiteDatabase db = mHelper.getWritableDatabase();
                                         ContentValues values = new ContentValues();
-                                        values.put(TaskContract.TaskEntry.COL_TASK_TITLE, task);
-                                        int r= db.update(TaskContract.TaskEntry.TABLE,values,TaskContract.TaskEntry._ID +"= "+ (info.id+1) ,null);
-                                        Log.d("return value = "," "+r);
+                                        values.put(TaskContract.TaskEntry.COL_TASK_TITLE, utask);
+                                        db.update(TaskContract.TaskEntry.TABLE,values,
+                                                TaskContract.TaskEntry.COL_TASK_TITLE + " = ?",
+                                                new String[]{task});
                                         db.close();
-                                        Log.d("on item click","updateeeed");
                                         updateUI();
                                     }
+
+
+
+
+
+
                                 })
                                 .setNegativeButton("Cancel", null)
                                 .create();
