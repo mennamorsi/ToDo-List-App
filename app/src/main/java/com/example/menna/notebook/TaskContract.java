@@ -8,8 +8,8 @@ import android.provider.BaseColumns;
 
 public class TaskContract {
 
-    public static final String DB_NAME = "com.menna.todolist.db";
-    public static final int DB_VERSION = 1;
+    public static final String DB_NAME = "Menna";
+    public static final int DB_VERSION =6 ;
 
     public class TaskEntry implements BaseColumns {
         public static final String TABLE = "tasks";

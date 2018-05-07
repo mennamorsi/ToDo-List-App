@@ -50,8 +50,6 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
 
 
     //da 7lwww
-
-
        /*   mTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, final int i, final long l) {
@@ -220,19 +218,6 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    /*public void deleteTask(View view) {
-        View parent = (View) view.getParent();
-        TextView taskTextView = (TextView) parent.findViewById(R.id.task_title);
-        String task = String.valueOf(taskTextView.getText());
-        SQLiteDatabase db = mHelper.getWritableDatabase();
-        db.delete(TaskContract.TaskEntry.TABLE,
-                TaskContract.TaskEntry.COL_TASK_TITLE + " = ?",
-                new String[]{task});
-        db.close();
-        updateUI();
-    }*/
-
-
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
@@ -249,11 +234,6 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
                         LayoutInflater inflater = this.getLayoutInflater();
                         final View dialogView = inflater.inflate(R.layout.edit_dialog, null);
                         builder.setView(dialogView)
-
-                       // AlertDialog dialog = new AlertDialog.Builder(this)
-                         //       .setTitle("Edit the Task")
-                           //     .setMessage("Change your task to ....?")
-                                //   .setView(taskEditText)
                                 .setPositiveButton("Commit", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -264,8 +244,7 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
                                         SQLiteDatabase db = mHelper.getWritableDatabase();
                                         ContentValues values = new ContentValues();
                                         values.put(TaskContract.TaskEntry.COL_TASK_TITLE, task);
-                                      //  db.delete(TaskContract.TaskEntry.TABLE, null, null);
-                                       int r= db.update(TaskContract.TaskEntry.TABLE,values,"_id" + "= "+ (info.id+2) ,null);
+                                        int r= db.update(TaskContract.TaskEntry.TABLE,values,TaskContract.TaskEntry._ID +"= "+ (info.id+1) ,null);
                                         Log.d("return value = "," "+r);
                                         db.close();
                                         Log.d("on item click","updateeeed");
